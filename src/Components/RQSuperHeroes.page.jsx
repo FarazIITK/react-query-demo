@@ -1,9 +1,9 @@
-import axios from "axios";
-import { useState } from "react";
-import { useQuery } from "react-query";
+import axios from 'axios';
+// import { useState } from 'react';
+import { useQuery } from 'react-query';
 
 const fetchSuperHeroes = () => {
-  return axios.get("http://localhost:4000/superheroes");
+  return axios.get('http://localhost:4000/superheroes');
 };
 
 // Other variation of the fetcher function
@@ -23,25 +23,25 @@ const fetchSuperHeroes = () => {
 // };
 
 export const RQSuperHeroesPage = () => {
-  const [isPolling, setIsPolling] = useState(true);
-  const onSuccess = (data) => {
-    if (data.data.length === 4) {
-      setIsPolling(false);
-    }
-  };
+  // const [isPolling, setIsPolling] = useState(true);
+  // const onSuccess = (data) => {
+  //   if (data.data.length === 4) {
+  //     setIsPolling(false);
+  //   }
+  // };
   const { isLoading, data, isError, error } = useQuery(
-    "super-heroes",
+    'super-heroes',
     fetchSuperHeroes,
     {
       // cacheTime: 60 * 1000,
       // staleTime: 10 * 1000,
       // retry: 2,
-      refetchInterval: isPolling ? 2000 : false,
+      // refetchInterval: isPolling ? 2000 : false,
       // refetchIntervalInBackground: false,
       // refetchOnMount: false,
       // refetchOnWindowFocus: true,
-      enabled: true,
-      onSuccess,
+      // enabled: true,
+      // onSuccess
     }
   );
 

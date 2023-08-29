@@ -1,8 +1,8 @@
-import axios from 'axios';
-import { useQuery } from 'react-query';
+import axios from "axios";
+import { useQuery } from "react-query";
 
 const fetchSuperHeroes = () => {
-  return axios.get('http://localhost:4000/superheroes');
+  return axios.get("http://localhost:4000/superheroes");
 };
 
 // Other variation of the fetcher function
@@ -22,9 +22,12 @@ const fetchSuperHeroes = () => {
 // };
 
 export const RQSuperHeroesPage = () => {
-  const { isLoading, data, isError, error } = useQuery(
-    'super-heroes',
-    fetchSuperHeroes
+  const { isLoading, isFetching, data, isError, error } = useQuery(
+    "super-heroes",
+    fetchSuperHeroes,
+    {
+      cacheTime: 5 * 1000,
+    }
   );
 
   if (isLoading) {
@@ -38,6 +41,7 @@ export const RQSuperHeroesPage = () => {
   return (
     <>
       <h2>React Query Super Heroes Page</h2>
+      {isFetching && <h3>Fetching in background</h3>}
       {data &&
         data.data.map((hero) => {
           return <div key={hero.name}>{hero.name}</div>;

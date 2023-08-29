@@ -27,11 +27,11 @@ export const RQSuperHeroesPage = () => {
     fetchSuperHeroes,
     {
       // cacheTime: 60 * 1000,
-      // staleTime: 10 * 1000,
+      staleTime: 10 * 1000,
       // retry: 2,
-      refetchInterval: 5000,
-      refetchIntervalInBackground: false,
-      // refetchOnMount: fa,
+      // refetchInterval: 5000,
+      // refetchIntervalInBackground: false,
+      // refetchOnMount: false,
       // refetchOnWindowFocus: true,
     }
   );

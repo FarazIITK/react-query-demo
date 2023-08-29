@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useState } from "react";
 import { useQuery } from "react-query";
 
 const fetchSuperHeroes = () => {
@@ -22,18 +23,25 @@ const fetchSuperHeroes = () => {
 // };
 
 export const RQSuperHeroesPage = () => {
-  const { isLoading, isFetching, data, isError, error, refetch } = useQuery(
+  const [isPolling, setIsPolling] = useState(true);
+  const onSuccess = (data) => {
+    if (data.data.length === 4) {
+      setIsPolling(false);
+    }
+  };
+  const { isLoading, data, isError, error } = useQuery(
     "super-heroes",
     fetchSuperHeroes,
     {
       // cacheTime: 60 * 1000,
-      staleTime: 10 * 1000,
+      // staleTime: 10 * 1000,
       // retry: 2,
-      // refetchInterval: 5000,
+      refetchInterval: isPolling ? 2000 : false,
       // refetchIntervalInBackground: false,
       // refetchOnMount: false,
       // refetchOnWindowFocus: true,
-      enabled: false,
+      enabled: true,
+      onSuccess,
     }
   );
 
@@ -48,8 +56,6 @@ export const RQSuperHeroesPage = () => {
   return (
     <>
       <h2>React Query Super Heroes Page</h2>
-      <button onClick={() => refetch()}>Fetch Superheroes</button>
-      {isFetching && <h3>Fetching in background</h3>}
       {data &&
         data.data.map((hero) => {
           return <div key={hero.name}>{hero.name}</div>;

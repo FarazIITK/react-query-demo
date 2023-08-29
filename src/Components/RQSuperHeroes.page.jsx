@@ -26,8 +26,13 @@ export const RQSuperHeroesPage = () => {
     "super-heroes",
     fetchSuperHeroes,
     {
-      cacheTime: 60 * 1000,
-      staleTime: 30 * 1000,
+      // cacheTime: 60 * 1000,
+      // staleTime: 10 * 1000,
+      // retry: 2,
+      refetchInterval: 5000,
+      refetchIntervalInBackground: false,
+      // refetchOnMount: fa,
+      // refetchOnWindowFocus: true,
     }
   );
 

@@ -1,4 +1,5 @@
 import { useSuperHeroesData } from '../hooks/useSuperHeroesData';
+import { Link } from 'react-router-dom';
 
 export const RQSuperHeroesPage = () => {
   // const [isPolling, setIsPolling] = useState(true);
@@ -23,7 +24,13 @@ export const RQSuperHeroesPage = () => {
       <h2>React Query Super Heroes Page</h2>
       {data &&
         data.map((hero) => {
-          return <div key={hero.name}>{hero.name}</div>;
+          return (
+            <div key={hero.name}>
+              <Link to={`/rq-super-heroes/${hero.id}`}>
+                {hero.name}
+              </Link>
+            </div>
+          );
         })}
     </>
   );

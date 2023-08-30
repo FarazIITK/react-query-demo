@@ -42,6 +42,14 @@ export const RQSuperHeroesPage = () => {
       // refetchOnWindowFocus: true,
       // enabled: true,
       // onSuccess
+      select: (data) => {
+        return data.data.map((superhero) => {
+          return {
+            ...superhero,
+            name: superhero.name.toUpperCase()
+          };
+        });
+      }
     }
   );
 
@@ -57,7 +65,7 @@ export const RQSuperHeroesPage = () => {
     <>
       <h2>React Query Super Heroes Page</h2>
       {data &&
-        data.data.map((hero) => {
+        data.map((hero) => {
           return <div key={hero.name}>{hero.name}</div>;
         })}
     </>
